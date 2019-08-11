@@ -51,7 +51,7 @@ public class PathFollower {
     double sw = isFinished() ? 0 : (trajectory.segments[currentSegIndex + 1].heading - currentSeg.heading)/currentSeg.dt;
 
     // Calculate linear and angular velocity based on errors
-    
+
     Outputs ramseteOutputs = ramseteController
         .calculate(new Pose2d(currentSeg.x, currentSeg.y, new Rotation2d(currentSeg.heading)), sv, sw, pose);
 
@@ -59,11 +59,10 @@ public class PathFollower {
 
     DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(drive_radius);
 
+    currentSegIndex++;
+
     return new VelocityPair(kinematics.toWheelSpeeds(speeds).left, kinematics.toWheelSpeeds(speeds).right);
   }
-
-
-
 
   public boolean isFinished() {
     return currentSegIndex >= trajectory.length();
