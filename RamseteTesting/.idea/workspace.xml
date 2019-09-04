@@ -2,10 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63b442ee-5edc-47a8-94ee-a4d9b17ce65a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Utils/PathFollower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Spline/CubicHermiteSpline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Spline/PoseWithCurvature.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Spline/QuinticHermiteSpline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Spline/Spline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/Spline/SplineHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/trajectory/Trajectory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/trajectory/TrajectoryGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/trajectory/TrapezoidProfile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/trajectory/constraint/CentripetalAccelerationConstraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lib/trajectory/constraint/TrajectoryConstraint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lib/Utils/PFTrajectoryFollower.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2974/robot/command/auton/TrajectoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2974/robot/command/auton/TrajectoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/team2974/robot/subsystems/Drivetrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/team2974/robot/subsystems/Drivetrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/Geometry/Pose2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/Geometry/Pose2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/Geometry/Rotation2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/Geometry/Rotation2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/Geometry/Transform2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/Geometry/Transform2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lib/Geometry/Translation2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lib/Geometry/Translation2d.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +43,50 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="RamseteTesting" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RamseteTesting" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RamseteTesting" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RamseteTesting" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RamseteTesting" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="test" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RamseteTesting" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="test" type="396b929e:GradleViewContributor$SourceSetNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -86,7 +139,10 @@
       <workItem from="1565481095764" duration="703000" />
       <workItem from="1565481920618" duration="280000" />
       <workItem from="1565482612180" duration="77000" />
-      <workItem from="1565482719475" duration="5238000" />
+      <workItem from="1565482719475" duration="15619000" />
+      <workItem from="1565619317051" duration="398000" />
+      <workItem from="1566101026673" duration="416000" />
+      <workItem from="1567612074440" duration="2003000" />
     </task>
     <servers />
   </component>

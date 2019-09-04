@@ -1,11 +1,5 @@
 package lib.Geometry;
 
-
-
-/**
- * A rotation in the 2D space.
- * @author RishabRao
- */
 /**
  * A rotation in a 2d coordinate frame represented a point on the unit circle
  * (cosine and sine).
@@ -102,6 +96,16 @@ public class Rotation2d {
    */
   public Rotation2d unaryMinus() {
     return new Rotation2d(-m_value);
+  }
+
+  /**
+   * Multiplies the current rotation by a scalar.
+   *
+   * @param scalar The scalar.
+   * @return The new scaled Rotation2d.
+   */
+  public Rotation2d times(double scalar) {
+    return new Rotation2d(m_value * scalar);
   }
 
   /**

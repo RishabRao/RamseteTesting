@@ -3,12 +3,13 @@ package lib.Geometry;
 /**
  * A change in distance along arc since the last pose update. We can use ideas
  * from differential calculus to create new Pose2ds from a Twist2d and vise
- *  * versa.
+ * versa.
  *
  * <p>A Twist can be used to represent a difference between two poses.
  */
 @SuppressWarnings("MemberName")
 public class Twist2d {
+
   /**
    * Linear "dx" component.
    */
@@ -29,6 +30,7 @@ public class Twist2d {
 
   /**
    * Constructs a Twist2d with the given values.
+   *
    * @param dx Change in x direction relative to robot.
    * @param dy Change in y direction relative to robot.
    * @param dtheta Change in angle relative to robot.

@@ -2,56 +2,49 @@ package frc.team2974.robot.command.auton;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Command;
-import jaci.pathfinder.Pathfinder;
+import frc.team2974.robot.command.teleop.Drive;
+import frc.team2974.robot.subsystems.Drivetrain;
 import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Trajectory.Config;
-import jaci.pathfinder.Trajectory.FitMethod;
-import jaci.pathfinder.followers.EncoderFollower;
-import jaci.pathfinder.modifiers.TankModifier;
+
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Watchable;
-import lib.Controller.RamseteController;
+
+import lib.Geometry.Pose2d;
+import lib.Utils.PathFollower;
 
 
 public class TrajectoryTest extends Command {
 
   private Notifier _notifier;
   private Runnable runnable;
+  private Drivetrain drivetrain;
+
+  private Pose2d startingPose;
+
+  public TrajectoryTest(Pose2d startPose) {
+    startingPose = startPose;
+  }
 
   @Override
   protected void initialize() {
 
-    String leftTrajectoryFilepath = "fix this";
-    String rightTrajectoryFilepath = "fix this";
+    String trajectoryPath = "fix this";
 
-    Trajectory leftTrajectory = null;
-    Trajectory rightTrajectory = null;
+
+    Trajectory trajectory = null;
 
     try {
-      leftTrajectory = PathfinderFRC.getTrajectory(leftTrajectoryFilepath);
-      rightTrajectory = PathfinderFRC.getTrajectory(rightTrajectoryFilepath);
+      trajectory = PathfinderFRC.getTrajectory(trajectoryPath);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    runnable = new Runnable() {
-      @Override
-      public void run() {
-      }
-    };
-    _notifier = new Notifier(runnable);
-
-    _notifier.startPeriodic(0.05);
 
     double kBeta = 0.1;
     double kZeta = 2;
 
-
-    RamseteController ramseteController = new RamseteController(kBeta, kZeta);
-
-
-
+    PathFollower pathFollower = new PathFollower(trajectory, 0.1, 0.5, 0.7);
+    Notifier notifier = new Notifier(() -> pathFollower.getRobotVelocity(Drivetrain.getInstance().updateRobotPoseRelative(startingPose)));
+    _notifier.startPeriodic(0.02);
   }
 
 

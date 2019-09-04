@@ -7,8 +7,6 @@ package lib.Geometry;
  * <p>This assumes that you are using conventional mathematical axes.
  * When the robot is placed on the origin, facing toward the X direction,
  * moving forward increases the X, whereas moving to the left increases the Y.
- *
- * @author RishabRao
  */
 @SuppressWarnings({"ParameterName", "MemberName"})
 public class Translation2d {
