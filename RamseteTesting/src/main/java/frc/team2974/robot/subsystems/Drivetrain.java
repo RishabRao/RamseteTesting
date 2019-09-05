@@ -1,6 +1,8 @@
 package frc.team2974.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team2974.robot.command.teleop.Drive;
@@ -20,6 +22,13 @@ public class Drivetrain extends Subsystem {
     public static Drivetrain mDrivetrain = new Drivetrain();
 
     public Drivetrain() {
+
+        CANSparkMax rightWheelsMaster = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
+        CANSparkMax rightWheelsSlave = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+        CANSparkMax leftWheelsMaster = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushless);
+        CANSparkMax leftWheelsSlave = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
+
         motorLeft.setInverted(true);
         encoderLeft.setReverseDirection(true);
 
@@ -34,6 +43,7 @@ public class Drivetrain extends Subsystem {
 
         driveOdometry = new DifferentialDriveOdometry(differentialDriveKinematics);
         compressor.stop();
+
     }
 
     public static Drivetrain getInstance() {
