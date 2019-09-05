@@ -13,4 +13,12 @@ public class VelocityPair {
     public VelocityPair getVelocityPair(double leftVelocity, double rightVelocity) {
       return new VelocityPair(leftVelocity, rightVelocity);
     }
+
+    public double getRightVelocity() {
+        return rightVelocity;
+    }
+
+    public double getLeftVelocity() {
+        return leftVelocity;
+    }
 }

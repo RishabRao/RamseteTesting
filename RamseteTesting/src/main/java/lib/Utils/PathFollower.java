@@ -1,12 +1,12 @@
 package lib.Utils;
 
+import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Trajectory.Segment;
 import lib.Controller.RamseteController;
 import lib.Controller.RamseteController.Outputs;
 import lib.Geometry.Pose2d;
 import lib.Geometry.Rotation2d;
-import lib.Geometry.Twist2d;
 import lib.Kinematics.ChassisSpeeds;
 import lib.Kinematics.DifferentialDriveKinematics;
 
@@ -15,9 +15,6 @@ public class PathFollower {
   private int currentSegIndex;
   private Segment currentSeg;
   private Trajectory trajectory;
-
-  private double kBeta;
-  private double kZeta;
 
   private double drive_radius;
 
@@ -32,6 +29,10 @@ public class PathFollower {
       drive_radius = driveRadius;
   }
 
+  /**
+   * @param pose : The current pose of the robot
+   * @return A velocity pair of the left and right wheel speeds
+   */
   public VelocityPair getRobotVelocity(Pose2d pose) {
 
     // Update Segment Safely
@@ -64,7 +65,7 @@ public class PathFollower {
     return new VelocityPair(kinematics.toWheelSpeeds(speeds).left, kinematics.toWheelSpeeds(speeds).right);
   }
 
-  public boolean isFinished() {
+  private boolean isFinished() {
     return currentSegIndex >= trajectory.length();
   }
 }
