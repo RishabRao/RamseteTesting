@@ -23,7 +23,6 @@ public class Robot extends TimedRobot {
 
     public static Drivetrain drivetrain;
     public static OI oi;
-    public static NetworkTable waltonDashboard;
 
     public Robot() {
         super(0.05);
