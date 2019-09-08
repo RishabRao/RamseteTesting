@@ -1,5 +1,7 @@
 package frc.team2974.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.*;
 
 import static frc.team2974.robot.Config.Hardware.*;
@@ -20,7 +22,14 @@ public final class RobotMap {
     public static final Compressor compressor;
     public static final Solenoid pneumaticsShifter;
 
+    public static final CANSparkMax rightWheelsMaster = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static final CANSparkMax rightWheelsSlave = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+    public static final CANSparkMax leftWheelsMaster = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public static final CANSparkMax leftWheelsSlave = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
+
     static {
+
         motorLeft = new Talon(LEFT_MOTOR_CHANNEL);
         motorRight = new Talon(RIGHT_MOTOR_CHANNEL);
 

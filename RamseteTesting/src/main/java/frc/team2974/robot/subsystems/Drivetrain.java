@@ -23,11 +23,6 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
 
-        CANSparkMax rightWheelsMaster = new CANSparkMax(1, CANSparkMaxLowLevel.MotorType.kBrushless);
-        CANSparkMax rightWheelsSlave = new CANSparkMax(2, CANSparkMaxLowLevel.MotorType.kBrushless);
-
-        CANSparkMax leftWheelsMaster = new CANSparkMax(3, CANSparkMaxLowLevel.MotorType.kBrushless);
-        CANSparkMax leftWheelsSlave = new CANSparkMax(4, CANSparkMaxLowLevel.MotorType.kBrushless);
 
         motorLeft.setInverted(true);
         encoderLeft.setReverseDirection(true);

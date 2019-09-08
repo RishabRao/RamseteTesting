@@ -10,7 +10,7 @@ import lib.Geometry.Rotation2d;
 import lib.Kinematics.ChassisSpeeds;
 import lib.Kinematics.DifferentialDriveKinematics;
 
-public class PathFollower {
+public class PathFinderFollower {
 
   private int currentSegIndex;
   private Segment currentSeg;
@@ -20,7 +20,7 @@ public class PathFollower {
 
   private RamseteController ramseteController;
 
-  public PathFollower(Trajectory traj, double kBeta, double kZeta, double driveRadius) {
+  public PathFinderFollower(Trajectory traj, double kBeta, double kZeta, double driveRadius) {
       ramseteController = new RamseteController(kBeta, kZeta);
 
       trajectory = traj;
