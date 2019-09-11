@@ -1,76 +1,60 @@
 package lib.Utils;
 
-import edu.wpi.first.wpilibj.Timer;
 import lib.Controller.RamseteController;
 import lib.Geometry.Pose2d;
-import lib.Geometry.Rotation2d;
 import lib.Kinematics.ChassisSpeeds;
-import lib.Kinematics.DifferentialDriveKinematics;
 import lib.trajectory.Trajectory;
 import lib.trajectory.Trajectory.State;
 
 public class TrajectoryFollower {
 
-    private Trajectory trajectory;
-    private double currentTime;
+  private Trajectory trajectory;
+  private double currentTime;
+  private double dt;
 
-    private double drive_radius;
+  private RamseteController ramseteController;
 
-    private double dt;
+  public TrajectoryFollower(Trajectory trajectory, double kBeta, double kZeta, double dt) {
+    this.ramseteController = new RamseteController(kBeta, kZeta);
+    this.trajectory = trajectory;
+    this.currentTime = 0;
+    this.dt = dt;
+  }
 
-    private RamseteController ramseteController;
+  /**
+   * @param pose : The current pose of the robot
+   * @return A velocity pair of the left and right wheel speeds
+   */
+  public ChassisSpeeds getRobotVelocity(Pose2d pose) {
 
-    public TrajectoryFollower(Trajectory trajectory, double kBeta, double kZeta, double driveRadius, double dt) {
-        this.ramseteController = new RamseteController(kBeta, kZeta);
-        this.trajectory = trajectory;
-        this.drive_radius = driveRadius;
-        this.currentTime = 0;
-        this.dt = dt;
-    }
+    State currentState = trajectory.sample(currentTime);
+    State nextState = trajectory.sample(currentTime + dt);
 
-    /**
-     * @param pose : The current pose of the robot
-     * @return A velocity pair of the left and right wheel speeds
-     */
-    public VelocityPair getRobotVelocity(Pose2d pose) {
+    double trajX = currentState.poseMeters.getTranslation().getX();
+    double trajY = currentState.poseMeters.getTranslation().getY();
 
-        if (isFinished())
-            return new VelocityPair(0, 0);
+    // Calculate X and Y error
+    double xError = trajX - pose.getTranslation().getX();
+    double yError = trajY - pose.getTranslation().getY();
 
-        State currentState = trajectory.sample(currentTime);
-        State nextState = trajectory.sample(currentTime + dt);
+    // Calculate Linear Velocity
 
-        double trajX = currentState.poseMeters.getTranslation().getX();
-        double trajY = currentState.poseMeters.getTranslation().getY();
+    double sv = currentState.velocityMetersPerSecond;
 
-        // Calculate X and Y error
-        double xError = trajX - pose.getTranslation().getX();
-        double yError = trajY - pose.getTranslation().getY();
+    // Calculate Angular Velocity
 
-        // Calculate Linear Velocity
+    double sw = isFinished() ? 0 : (nextState.poseMeters.getRotation().getDegrees() - currentState.poseMeters.getRotation().getDegrees()) / dt;
 
-        double sv = currentState.velocityMetersPerSecond;
+    // Calculate linear and angular velocity based on errors
 
-        // Calculate Angular Velocity
+    ChassisSpeeds ramseteOutputs = ramseteController.calculate(currentState.poseMeters, pose, sv, sw);
 
-        double sw = isFinished() ? 0 : (nextState.poseMeters.getRotation().getDegrees() - currentState.poseMeters.getRotation().getDegrees())/dt;
+    currentTime = currentTime + dt;
 
-        // Calculate linear and angular velocity based on errors
+    return ramseteOutputs;
+  }
 
-        RamseteController.Outputs ramseteOutputs = ramseteController
-                .calculate(new Pose2d(currentState.poseMeters.getTranslation().getX(), currentState.poseMeters.getTranslation().getY(), new Rotation2d(currentState.poseMeters.getRotation().getDegrees())),
-                        sv, sw, pose);
-
-        ChassisSpeeds speeds = new ChassisSpeeds(ramseteOutputs.linearVelocity,0,ramseteOutputs.angularVelocity);
-
-        DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(drive_radius);
-
-        currentTime = currentTime + dt;
-
-        return new VelocityPair(kinematics.toWheelSpeeds(speeds).left, kinematics.toWheelSpeeds(speeds).right);
-    }
-
-    public boolean isFinished() {
-        return currentTime >= trajectory.getTotalTimeSeconds();
-    }
+  public boolean isFinished() {
+    return ramseteController.atReference();
+  }
 }
