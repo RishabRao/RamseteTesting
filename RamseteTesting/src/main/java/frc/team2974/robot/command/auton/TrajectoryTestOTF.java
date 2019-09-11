@@ -39,7 +39,7 @@ public class TrajectoryTestOTF extends Command {
         Pose2d currentPose = Drivetrain.getInstance().updateRobotPose();
         VelocityPair robotVelocities = trajectoryFollower.getRobotVelocity(currentPose);
 
-        
+
     }
 
     @Override

@@ -34,7 +34,6 @@ public class TrajectoryFollower {
      */
     public VelocityPair getRobotVelocity(Pose2d pose) {
 
-        // Update Segment Safely
         if (isFinished())
             return new VelocityPair(0, 0);
 
@@ -48,11 +47,11 @@ public class TrajectoryFollower {
         double xError = trajX - pose.getTranslation().getX();
         double yError = trajY - pose.getTranslation().getY();
 
-        // Calculate Linear Velocity of Segment
+        // Calculate Linear Velocity
 
         double sv = currentState.velocityMetersPerSecond;
 
-        // Calculate Angular Velocity of Segment
+        // Calculate Angular Velocity
 
         double sw = isFinished() ? 0 : (nextState.poseMeters.getRotation().getDegrees() - currentState.poseMeters.getRotation().getDegrees())/dt;
 
